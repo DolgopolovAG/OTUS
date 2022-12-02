@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: lesson6-deployment
+spec:
+    replicas: 2
+    selector:
+       matchLabels:
+          app: lesson6-app
+    template:
+       metadata:
+          labels:
+             app: lesson6-app
+       spec:
+          containers:
+          - name: lesson6
+            image: alexdolg/otus:lesson6-otus
+            ports:
+              - name: web
+                containerPort: 8000
