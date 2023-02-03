@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lessons7-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: lessons7-service
+                port:
+                  number: 8000
+            path: /

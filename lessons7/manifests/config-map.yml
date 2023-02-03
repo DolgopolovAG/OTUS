@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lessons7-cm
+data:
+  application.yml: |
+    server:
+      port: 8000
+    spring:
+      datasource:
+        url: jdbc:postgresql://psql-postgresql:5432/user_db
+        driver-class-name: org.postgresql.Driver
+        username: ${PG_USER}
+        password: ${PG_PASSWORD}
+      sql:
+        init:
+          mode: always
+        
+    management:
+      endpoint:
+        health:
+          show-details: always
+      endpoints:
+        web:
+          exposure:
+            include: "*"
