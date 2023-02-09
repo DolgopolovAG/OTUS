@@ -13,8 +13,3 @@ kubectl apply -f service.yml
 kubectl apply -f ingress.yml 
 kubectl apply -f postgres-pv.yml 
 kubectl apply -f postgres-pvc.yml
-
-
-
-если не включен nginx в миникуб то устанавливаем:
-helm install nginx ingress-nginx/ingress-nginx -n my -f nginx-ingress-controller.yml
