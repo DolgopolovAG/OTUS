@@ -1,12 +1,3 @@
-kubectl delete ingress lessons7-ingress  --namespace=my
-kubectl delete service lessons7-service  --namespace=my
-kubectl delete service psql-postgresql  --namespace=my
-kubectl delete service psql-postgresql-hl  --namespace=my
-kubectl delete deployment lessons7-deployment  --namespace=my
-kubectl delete StatefulSets psql-postgresql --namespace=my
-kubectl delete secret lessons7-secret  --namespace=my
-kubectl delete сonfigmap lessons7-cm  --namespace=my
-kubectl delete PersistentVolumeClaim postgresql-pvc  --namespace=my
-kubectl delete namespaces my
-
-
+helm uninstall psql
+kubectl config set-context --current --namespace=default  
+kubectl delete namespaces my  
