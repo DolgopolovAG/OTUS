@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lessons12-deployment
+  labels:
+    app: lessons12
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lessons12
+  template:
+    metadata:
+      labels:
+        app: lessons12
+    spec:
+      containers:
+        - name: lessons12
+          image: alexdolg/otus:lesson12-otus
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              path: /health
+              port: 8000
+          readinessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              path: /health
+              port: 8000
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+          env:
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: lessons12-secret
+                  key: PG_PASSWORD
+                  optional: false
+            - name: PG_USER
+              valueFrom:
+                secretKeyRef:
+                  name: lessons12-secret
+                  key: PG_USER
+                  optional: false
+      volumes:
+        - name: config
+          configMap:
+            name: lessons12-cm
+            items:
+              - key: application.yml
+                path: application.yml
