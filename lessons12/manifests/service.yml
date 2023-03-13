@@ -2,10 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: lessons12-service
+  labels:
+    app: lessons12
 spec:
   selector:
     app: lessons12
   ports:
     - protocol: TCP
+      name: metrics
       port: 8000
       targetPort: 8000

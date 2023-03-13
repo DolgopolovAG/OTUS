@@ -20,9 +20,10 @@ kubectl apply -f service-monitor.yml
 helm install prometheus prometheus-community/kube-prometheus-stack -n my
 
 
+_____________________________________________________________
 если не включен nginx в миникуб то устанавливаем:
 helm install nginx ingress-nginx/ingress-nginx -n my -f nginx-ingress-controller.yml
-
+helm upgrade nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace my --set controller.metrics.enabled=true --set-string  ontroller.podAnnotations."prometheus.io/scrape"="true" --set-string controller.podAnnotations."prometheus.io/port"="10254"
 
 графана
 UserName: admin
